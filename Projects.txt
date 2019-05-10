@@ -1,0 +1,37 @@
+Supervised Learning:
+	Spam Classification - scikit
+	Diabetes Case Study - scikit
+	Predicting probable donors for charity - scikit
+
+Deep Learning:
+	Student Admission Prediction - Keras
+	Analyzing IMDB Reviews - Keras
+	Digits classification - Pytorch
+        Shopping apparel classification - Pytorch
+	Cat vs Dog image clasification - Pytorch
+	Image classification on Flower dataset - Pytorch
+
+Unsupervised Learning:
+	K-means Clustering of Movie Ratings - scikit
+	PCA in Digits Classification - scikit
+	ICA in separating signals - scikit
+	Identify Customer Segments
+
+Data Analysis:
+	Exploring Stack Overflow data
+	Exploring AirBnB data
+
+Software Engineering:
+	Creating a PyPI package
+	Data Dashboard for World Bank API - flask, plotly, pandas
+
+Data Engineering:
+	Exploring World Bank Data
+	Disaster response pipeline
+
+Recommendation Engines:
+	Movie Recommendation
+	IBM Watson article recommendation
+
+Capstone Project:
+	Predicting customer churn 
