@@ -1,0 +1,68 @@
+Kolmogorov–Smirnov Test: 
+A threshold of 20 is a fine choice. You might also think about using some sort of statistical hypothesis test here as well. 
+You might check out using a Kolmogorov–Smirnov test to test each column against the null hypothesis. 
+The lower the p-value the more we can assume that the two distributions are different.
+
+from scipy.stats import ks_2samp
+comp_df = pd.DataFrame(dataset_main.columns, columns=['col'])
+def hypothesis_test(df1, df2, cols):
+    stats = []
+    pvalues = []
+    for col in cols:
+        counts_main = df1[col].value_counts().sort_index()
+        counts_drop = df2[col].value_counts().sort_index()
+        try:
+            ch = ks_2samp(counts_main, counts_drop)
+            stats.append(ch.statistic)
+            pvalues.append(ch.pvalue)
+        except:
+            stats.append(np.nan)
+            pvalues.append(np.nan)
+    return stats, pvalues
+
+stats, pvalues = hypothesis_test(azdias_below, azdias_above, azdias_below.columns.values)
+comp_df['stats'] = stats
+comp_df['pvalues'] = pvalues
+comp_df.head()
+
+
+
+
+Distplot:
+Visuals are quite nice here. You might also look into plotting some seaborn distplots. For example.
+plt.figure(figsize=(100,100))
+for i, col in enumerate(azdias.columns[:10]):
+    plt.subplot(5, 2, i+1)
+    sns.distplot(azdias_below[col][azdias_below[col].notnull()], label='below')
+    sns.distplot(azdias_above[col][azdias_above[col].notnull()], label='above')
+    plt.title('Distribution for column: {}'.format(col))
+    plt.legend();
+
+
+
+
+Mixed Feature:
+You might also look into creating a couple new features for the WOHNLAGE feature. 
+Maybe engineer a new variable that acts as a rural flag (e.g. 1-5 = not rural, 7-8 = rural).
+Here might be a couple of function ideas to explore for the WOHNLAGE feature.
+
+def create_WOHNLAGE_neigh(row):
+    if np.isnan(row): return row
+    if row in [1., 2., 3., 4., 5.]: return row
+    else: return 0
+def create_WOHNLAGE_rural(row):
+    if np.isnan(row): return row
+    if row in [7., 8.]: return row
+    else: return 0
+
+
+
+
+You might first remove all data points with missing values and perform feature scaling as in the first bullet point,
+ but then go back to the original data, impute missing values, then apply the transformation that was previously fit.
+Methods-wise, if we have scaler = StandardScaler(), then we’ll first use scaler.fit() on the data without missing-value data points,
+then apply scaler.transform() on the data with all data points and imputed values.
+
+
+
+
