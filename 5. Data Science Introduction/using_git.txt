@@ -1,0 +1,9 @@
+git clone - clone a repository from any url to your local machine
+
+git status
+
+git add * - adds all the files of the repository to the staging area
+
+git commit -m 'comment about changes made' - commits changes and adds a message for changes made
+
+git push - pushes your changes to a remote repository

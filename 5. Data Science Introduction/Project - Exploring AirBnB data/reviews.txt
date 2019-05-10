@@ -1,0 +1,6 @@
+There is no perfect solution here but you can explore other scalars and then compare them how they are different.
+
+You should do imputation after scaling because scaling requires computing mean and variance, if imputation before scaling, 
+then the true means and variances of the features would be corrupted by the filled missing values, 
+so I think scaling on the non-missing data and then do imputation for the missing values would be more reasonable.
+
